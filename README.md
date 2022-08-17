@@ -7,9 +7,9 @@ The scripts in this repo can be used to
 - compute multiplication operators in 1D and on triangles
 - compute sparse discrete PDOs in 1D and on triangles
 - compute Gaussian quadrature for any Jacobi weight in 1D
-- compute Gaussian-like quadrature for anny Koornwinder weight on the triangle
+- compute Gaussian-like quadrature for any Koornwinder weight on the triangle
 - solve most second order ODEs
-- solve Poisson and Helmholtz problems on the triangle
+- solve Poisson and variable-coefficient Helmholtz problems on the triangle
 - explore the connection between Gaussian-like quadrature and 
   Joint-Eigenvalue-Decomposition algorithms, as employed in signal 
   processing problems like blind source seperation 

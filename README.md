@@ -1,6 +1,6 @@
 This repository contains a collection of scripts used to explore the construction
 of sparse discrete partial differential operators in 1D, on triangles, and
-tetrahedra, using orthogonal polynomials. In 1D, we consider the Jacobi polynomials. Onsimplices, we consider the higher-dimensional analogs of Jacobi polynomials, such as those due to Koornwinder on triangles. The goal here is to construct efficient, compressed, and spectrally accurate solvers for a broad class of problems. 
+tetrahedra, using orthogonal polynomials. In 1D, we consider the Jacobi polynomials. On simplices, we consider the higher-dimensional analogs of Jacobi polynomials, such as those due to Koornwinder on triangles. The goal here is to construct efficient, compressed, and spectrally accurate solvers for a broad class of problems. 
 
 The scripts in this repo can be used to
 - compute Jacobi matrices in 1D and on triangles

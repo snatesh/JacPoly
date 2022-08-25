@@ -23,7 +23,6 @@
 \author{Sachin Natesh}
 \date{\today}
 
-
 \begin{document}
 	\setcounter{secnumdepth}{5}
 	\setcounter{tocdepth}{4}
@@ -347,11 +346,11 @@ Hence, care must be taken when selecting the $(a,b)$ parameters to represent the
 %\end{equation}
 \newpage
 \mysection{Jacobi Ladders for Sparse Discrete Operators on the Triangle}{}
-Here, we construct sparse differential operators for BVPs on the triangle $$\mathcal{T}^2 := \{(x,y)\s|\s 0\leq x,y,x+y\leq 1\}$$ using the classical orthogonal polynomials on this domain, due to Koornwinder. For starters, we want to solve Poisson's equation with Dirichlet data:
+Here, we construct sparse differential operators for BVPs on the triangle $$\Tref^2 := \{(x,y)\s|\s 0\leq x,y,x+y\leq 1\}$$ using the classical orthogonal polynomials on this domain, due to Koornwinder. For starters, we want to solve Poisson's equation with Dirichlet data:
 \begin{equation}\label{eq:laptri}
 	\begin{split}
-	\Delta u(x,y) &= f(x,y),\quad (x,y) \in \mathcal{T}^2\\
-	u(x,y) &= g(x,y),\quad (x,y) \in \partial\mathcal{T}^2.
+	\Delta u(x,y) &= f(x,y),\quad (x,y) \in \Tref^2\\
+	u(x,y) &= g(x,y),\quad (x,y) \in \partial\Tref^2.
 	\end{split}
 \end{equation}
 \myssection{Koornwinder polynomials}{sec:koornpoly}
@@ -359,7 +358,7 @@ To simplify notation in this section, $P_k^n$ denotes the $k^{\text{th}}$ Koornw
 \begin{equation}\label{eq:koornweight}
 	\begin{split}
 	W(x,y) &= x^{a-\frac{1}{2}}y^{b-\frac{1}{2}}(1-x-y)^{c-\frac{1}{2}},\\
-	w_{a,b,c} &= \Big(\int_{\mathcal{T}^2}W(x,y)dxdy\Big)^{-1}=\frac{\Gamma(|\kappa| + \frac{3}{2})}{\Gamma(a+\frac{1}{2})\Gamma(b+\frac{1}{2})\Gamma(c+\frac{1}{2})}
+	w_{a,b,c} &= \Big(\int_{\Tref^2}W(x,y)dxdy\Big)^{-1}=\frac{\Gamma(|\kappa| + \frac{3}{2})}{\Gamma(a+\frac{1}{2})\Gamma(b+\frac{1}{2})\Gamma(c+\frac{1}{2})}
 	\end{split}
 \end{equation}
 with $a,b,c > -1/2$ the Jacobi parameters, and $|\kappa| = a+b+c$. The orthonormal polynomials are given in terms of the 1D Jacobi polynomials by
@@ -446,7 +445,7 @@ If we consider the Jacobi expansion of $f(x_1,x_2) \approx \bs{f}^T\bs{P}(x_1,x_
 	x_if(x_1,x_2) \approx x_i\bs{P}(x_1,x_2)^T\bs{f} = \Big(\bs{P}(x_1,x_2)^T \mathcal{J}_{n,i}+ \begin{bmatrix} \bf{0}_{1\times (N-n)} & \bb{P}_n(x_1,x_2)^TA_{n-1,i}^T\end{bmatrix}\Big)\bs{f},\quad i=1,2
 \end{equation}
 
-We can evaluate the above expression for $(\bs{x}_1,\bs{x}_2)$ a set of $N$ points in $\mathcal{T}^2$ (viewed as a row of $N$ pairs), and see that $[\bs{P}(\bs{x}_1,\bs{x}_2)]^T$ is the Vandermonde matrix. The component-wise product can now be given as
+We can evaluate the above expression for $(\bs{x}_1,\bs{x}_2)$ a set of $N$ points in $\Tref^2$ (viewed as a row of $N$ pairs), and see that $[\bs{P}(\bs{x}_1,\bs{x}_2)]^T$ is the Vandermonde matrix. The component-wise product can now be given as
 \begin{equation}\label{eq:mbyxtri}
 	\begin{split}
 	[\bs{x}_i\odot f(\bs{x}_1,\bs{x}_2)]^T &\approx \bs{P}(\bs{x}_1,\bs{x}_2)^T\big(\mathcal{J}_{x_i} \bs{f}\big), \quad i = 1,2\\
@@ -469,18 +468,18 @@ The hope here is that we can generalize the Golub-Welsch algorithm described in 
 \end{equation}
 This is equivalent to stating that $J_{n,i}$ are a commuting family, and hence, simultaneously diagonalizable. By inspection, we see that the coefficient matrices in the recurrence for Jacobi polynomials on the triangle \underline{do not}, in general, satisfy the commutativity relation. Thus, \emph{there do not exist minimal Gaussian quadrature rules on the Triangle using the classic orthogonal polynomials}.
 
-We need an accurate quadrature on the triangle, as the convergence of the solver depends highly on accurate representations of the right-hand-side in the modal basis. While $J_{n,i}$ may not commute, there is a connection between their spectrums and non-minimal Gaussian-like quadrature rules on $\mathcal{T}^2$. Vioreanu and Rokhlin show in \cite{vrquad} that the joint eigenvalues of the combined complex operator 
+We need an accurate quadrature on the triangle, as the convergence of the solver depends highly on accurate representations of the right-hand-side in the modal basis. While $J_{n,i}$ may not commute, there is a connection between their spectrums and non-minimal Gaussian-like quadrature rules on $\Tref^2$. Vioreanu and Rokhlin show in \cite{vrquad} that the joint eigenvalues of the combined complex operator 
 \begin{equation}\label{eq:Jn}
 	\mathcal{J}_n = \mathcal{J}_{n,1}+\iota \mathcal{J}_{n,2}
 \end{equation}	
-lie within $\mathcal{T}^2$ (Theorem 3.4 in \cite{vrquad}). The algorithm described in their work uses the constant unit weight function and gives an alternate way to evaluate $\mathcal{J}_{n}$. For the case of the weighted space $L^2(\mathcal{T},w_{a,b,c}W(x,y))$ with normalized weight (see \eqref{eq:koornweight}), the entries are
+lie within $\Tref^2$ (Theorem 3.4 in \cite{vrquad}). The algorithm described in their work uses the constant unit weight function and gives an alternate way to evaluate $\mathcal{J}_{n}$. For the case of the weighted space $L^2(\mathcal{T},w_{a,b,c}W(x,y))$ with normalized weight (see \eqref{eq:koornweight}), the entries are
 \begin{equation}\label{eq:jnvr}
 (\mathcal{J}_n)_{i,j} = \int_{\mathcal{T}} (x_1+\iota x_2)P_j(x,y)P_i(x,y)w_{a,b,c}W(x,y)dxdy,\quad 0\leq i,j\leq N-1,
 \end{equation}
-where $P_j$ is the $j^\text{th}$ component of $\bs{P} = (\bb{P}_0^T,\bb{P}_1^T,\cdots,\bb{P}_{n-1}^T)^T = (P_0^0,P_0^1,P_1^1,\cdots P_n^n)^T \in \bb{R}^N$. Noting the correspondence between \eqref{eq:recur2D1}-\eqref{eq:recur2D2} and \eqref{eq:jnvr}, we see that our construction for $J_n$ in \eqref{eq:Jn} is precisely the same operator, except the integrals have been evaluated analytically in the formulas like \eqref{eq:koornmatrec}. This gives us a strategy for finding near optimal quadratures on $\mathcal{T}^2$ by way of Newton's method. We want to integrate the $M$ polynomials up to total degree $m-1$ exactly with $m \geq n$ using only $N$ nodes and weights. That is, with $M=\dim\Pi_{m-1}^d = {m-1+d\choose m-1}$, the integrals for which we want an exact quadrature are
+where $P_j$ is the $j^\text{th}$ component of $\bs{P} = (\bb{P}_0^T,\bb{P}_1^T,\cdots,\bb{P}_{n-1}^T)^T = (P_0^0,P_0^1,P_1^1,\cdots P_n^n)^T \in \bb{R}^N$. Noting the correspondence between \eqref{eq:recur2D1}-\eqref{eq:recur2D2} and \eqref{eq:jnvr}, we see that our construction for $J_n$ in \eqref{eq:Jn} is precisely the same operator, except the integrals have been evaluated analytically in the formulas like \eqref{eq:koornmatrec}. This gives us a strategy for finding near optimal quadratures on $\Tref^2$ by way of Newton's method. We want to integrate the $M$ polynomials up to total degree $m-1$ exactly with $m \geq n$ using only $N$ nodes and weights. That is, with $M=\dim\Pi_{m-1}^d = {m-1+d\choose m-1}$, the integrals for which we want an exact quadrature are
 \begin{equation}\label{eq:exactint}
 \begin{split}
-\mathcal{I}_j &= \int_{\mathcal{T}^2} P_j(x,y)w_{a,b,c}W(x,y)dxdy,\quad 0\leq j \leq M-1\\
+\mathcal{I}_j &= \int_{\Tref^2} P_j(x,y)w_{a,b,c}W(x,y)dxdy,\quad 0\leq j \leq M-1\\
 &=\langle P_j,P_0\rangle = \delta_{j0},
 \end{split}
 \end{equation}
@@ -493,7 +492,7 @@ For the Newton iteration
 \begin{equation}
 	\bs{z}_{k+1} = \bs{z}_k - \alpha_k[\nabla \bs{F}(\bs{z}_k)]^+\bs{F}(\bs{z_k}),
 \end{equation}
-the choice of initial point $\bs{z}_0 = (\bs{x}_0,\bs{y}_0,\bs{w}_0)$ and control of the step length $\alpha_k$ are vital for its convergence. Moreover, we'd like to incorporate inequality constraints on $\bs{z}_k$ to enforce that quadrature nodes are interior to $\mathcal{T}^2$, and we want the weights to be positive with unit sum. By casting the problem of finding roots of \eqref{eq:newtobj} into a minimization problem followed by a relaxation of $\bs{F}$, we can use techniques from constrained convex optimization to find acceptable quadratures. The optimization problem we would like to solve is 
+the choice of initial point $\bs{z}_0 = (\bs{x}_0,\bs{y}_0,\bs{w}_0)$ and control of the step length $\alpha_k$ are vital for its convergence. Moreover, we'd like to incorporate inequality constraints on $\bs{z}_k$ to enforce that quadrature nodes are interior to $\Tref^2$, and we want the weights to be positive with unit sum. By casting the problem of finding roots of \eqref{eq:newtobj} into a minimization problem followed by a relaxation of $\bs{F}$, we can use techniques from constrained convex optimization to find acceptable quadratures. The optimization problem we would like to solve is 
 \begin{equation}\label{eq:newtopt}
 \begin{split}
 &\min_{\bs{z} \in \bb{R}^{3N}}||\bs{F}(\bs{z})||_2^2 \quad\text{such that}\quad G\bs{z} < g,\s \begin{bmatrix} \bs{0_{1\times 2N}} & \bs{1_{1\times N}}\end{bmatrix}\bs{z} = 1 \quad\text{where}\\ G &= \begin{bmatrix} -I & \times & \times \\\times & -I & \times \\ \times &\times  & -I \\ I & \times & \times \\ I & I & \times \end{bmatrix} \in \bb{R}^{5N\times 3N},\quad
@@ -505,7 +504,7 @@ The zero entries in the constraint matrix $G$ are denoted by $\times$, and $I$ i
 %While the method described below is very similar to that presented in \cite{vrquad}, there is a crucial difference; we orthonormalize and then discretize, while they discretize and then orthonormalize. 
 %\color{black}
 \mysssection{Numerical algorithm to generate Gaussian-like quadrature}{}
-Given an input total degree $n$, and desired total degree $m \geq n$, the following procedure generates an $N = \dim\Pi_{n-1}^d$ point quadrature capable of exactly integrating the first $M = \dim\Pi_{m-1}^d$ polynomials (up to degree $m-1$) on $\mathcal{T}^2$. By specializing the algorithm in \cite{vrquad} to the Koornwinder polynomials, we alleviate the need for an initial quadrature rule to compute the multiplication operators.
+Given an input total degree $n$, and desired total degree $m \geq n$, the following procedure generates an $N = \dim\Pi_{n-1}^d$ point quadrature capable of exactly integrating the first $M = \dim\Pi_{m-1}^d$ polynomials (up to degree $m-1$) on $\Tref^2$. By specializing the algorithm in \cite{vrquad} to the Koornwinder polynomials, we alleviate the need for an initial quadrature rule to compute the multiplication operators.
 \noindent
 \begin{enumerate}[(i)]
 %\item Generate an accurate quadrature to evaluate the integrals in \eqref{eq:exactint}. Reasonable choices include 
@@ -513,7 +512,7 @@ Given an input total degree $n$, and desired total degree $m \geq n$, the follow
 %	\item (Q2T) Product Legendre quadrature on the reference quadrilateral, mapped to the triangle. 
 %	\item (T2Q) The collection of Legendre quadratures on three quadrilaterals into which the triangle can be partitioned.
 %\end{itemize}
-%Note, the weights from the initial product quadratures on the reference quadrilateral must be multiplied with the Jacobian of the parameterization. We find that T2Q exhibits proper spectral behavior, allowing for accurate evaluation of \eqref{eq:exactint}. This is because it is the direct sum of reference quadrilateral quadratures mapped to general quads. These mappings are typically better conditioned than maps from quads to triangles. $\mathcal{T}^2$.
+%Note, the weights from the initial product quadratures on the reference quadrilateral must be multiplied with the Jacobian of the parameterization. We find that T2Q exhibits proper spectral behavior, allowing for accurate evaluation of \eqref{eq:exactint}. This is because it is the direct sum of reference quadrilateral quadratures mapped to general quads. These mappings are typically better conditioned than maps from quads to triangles. $\Tref^2$.
 \item Create the Jacobi matrices as in \eqref{eq:jacmat2d}
 \item The eigenvalues of $\mathcal{J}_n$ projected in $\bb{R}^2$ serve as an initial node set $(\bs{x}_0,\bs{y}_0)$ for the Newton iteration. The QR algorithm is well suited for finding these eigenvalues. The weights can be initialized by solving in the least-squares sense $$\bs{P}(\bs{x}_0,\bs{y}_0)\bs{w}_0 = \bs{\mathcal{I}}.$$
 In words, the weights are the first column of the pseudoinverse $[\bs{P}(\bs{x}_0,\bs{y}_0)]^+$.
@@ -524,11 +523,11 @@ In words, the weights are the first column of the pseudoinverse $[\bs{P}(\bs{x}_
 \end{enumerate}
 
 \mysssection{Quadrature verification}{}
-Given a polynomial degree $n$, we run the algorithm to obtain an $N=\dim\Pi_{n}^2$ point quadrature rule of order $m$ and capable of exactly integrating $M=\dim\Pi_m^2$ polynomials with positive weights and interior nodes. \myref{Table}{tab:quadverif} provides the maximal order $m$ obtainable given the input $n$ for the analog of the Legendre weight function on $\mathcal{T}^2$. These are the Koornwinder polynomials with $a=b=c=1/2$.
+Given a polynomial degree $n$, we run the algorithm to obtain an $N=\dim\Pi_{n}^2$ point quadrature rule of order $m$ and capable of exactly integrating $M=\dim\Pi_m^2$ polynomials with positive weights and interior nodes. \myref{Table}{tab:quadverif} provides the maximal order $m$ obtainable given the input $n$ for the analog of the Legendre weight function on $\Tref^2$. These are the Koornwinder polynomials with $a=b=c=1/2$.
 \begin{table}[H]
 	\centering
 	\caption{For each initial polynomial degree $n$ from 1 to 10, we list the
-		corresponding maximum order m of a quadrature having positive weights. The number of nodes of the quadrature is $N = (n + 1)(n + 2)/2$ and the number of polynomials which can be integrated exactly is $M = \dim\Pi_m^2 = (m + 1)(m + 2)/2$. The condition number of the associated interpolation matrix is listed in the row labeled CN. We use the Legendre analog weight function (unit weight) on $\mathcal{T}^2$, i.e with Koornwinder parameters $a=b=c=1/2$.}\label{tab:quadverif}
+		corresponding maximum order m of a quadrature having positive weights. The number of nodes of the quadrature is $N = (n + 1)(n + 2)/2$ and the number of polynomials which can be integrated exactly is $M = \dim\Pi_m^2 = (m + 1)(m + 2)/2$. The condition number of the associated interpolation matrix is listed in the row labeled CN. We use the Legendre analog weight function (unit weight) on $\Tref^2$, i.e with Koornwinder parameters $a=b=c=1/2$.}\label{tab:quadverif}
 	\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|}
 		\hline
 		$n$ & 1   & 2   & 3   & 4   & 5   & 6   & 7    & 8    & 9    & 10   & 11   & 12   & 13   & 14 & 15 \\ \hline
@@ -538,13 +537,13 @@ Given a polynomial degree $n$, we run the algorithm to obtain an $N=\dim\Pi_{n}^
 		CN  & 1.2 & 1.75 & 1.86 & 2.39 & 2.99 & 4.54 & 4.81 & 5.34 & 5.5 & 6.24 & 8.15 & 12.1 & 8.85 & 15.7 & 8.0  \\ \hline
 	\end{tabular}
 \end{table}
-We obtain the same efficiency as defined and observed in \cite{vrquad}, and the interpolation matrices are well conditioned. In \myref{Figure}{fig:triquadlegplot} we plot the quadrature nodes for each of the rules in \myref{Table}{tab:quadverif}, excluding the last column. Notably, all nodes are interior to $\mathcal{T}^2$. 
+We obtain the same efficiency as defined and observed in \cite{vrquad}, and the interpolation matrices are well conditioned. In \myref{Figure}{fig:triquadlegplot} we plot the quadrature nodes for each of the rules in \myref{Table}{tab:quadverif}, excluding the last column. Notably, all nodes are interior to $\Tref^2$. 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\linewidth]{./figures/triquadLeg_plot}
-	\caption{Quadrature nodes on $\mathcal{T}^2$, corresponding to Table \ref{tab:quadverif}}\label{fig:triquadlegplot}
+	\caption{Quadrature nodes on $\Tref^2$, corresponding to Table \ref{tab:quadverif}}\label{fig:triquadlegplot}
 \end{figure}
-In \myref{Figure}{fig:triquadlegerr}, we plot the relative error in approximating $I = \int_{\mathcal{T}^2} f(x,y) dxdy$ as $N$ the size of the quadrature rule is increased. The reference integrals $I$ are approximated with the quadrature rule of order $m=26$ (last column in \myref{Table}{tab:quadverif}).
+In \myref{Figure}{fig:triquadlegerr}, we plot the relative error in approximating $I = \int_{\Tref^2} f(x,y) dxdy$ as $N$ the size of the quadrature rule is increased. The reference integrals $I$ are approximated with the quadrature rule of order $m=26$ (last column in \myref{Table}{tab:quadverif}).
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.9\linewidth]{./figures/triquadLeg_err}
@@ -556,7 +555,7 @@ We choose several standard test functions, including a few due to Genz \cite{gen
 Though not provided here, these results hold for alternative choices of $(a,b,c)$. However, the interpolation matrices tend to slowly grow more ill-conditioned as $(N,a,b,c)$ are increased, and it becomes more difficult for our algorithm to find suitable quadratures. To the extent that these quadratures are used for computing expansion coefficients, this is not a problem. We can always convert coefficients from the Legendre basis to one with larger parameters (integer difference), as described in \myref{Section}{sec:promotetri}.
 
 \mysssection{Generalization for higher dimensions}{}
-On the triangle, and in fact, for most higher dimensional orthogonal polynomials, $J_{n,i}$ are not exactly jointly diagonlizable. We exploited the isomorphism between $\bb{R}^2$ and the complex plane for $d=2$ to match the eigenvalues of $J_{n,1},J_{n,2}$. This structure does not exist for $d>2$. However, there is still a connection between the approximate joint eigenvalues of $J_{n,i}$ and interior points of $\mathcal{T}^2$. To be clear, we must specify what is meant by ``approximate'' joint eigenvalues. 
+On the triangle, and in fact, for most higher dimensional orthogonal polynomials, $J_{n,i}$ are not exactly jointly diagonlizable. We exploited the isomorphism between $\bb{R}^2$ and the complex plane for $d=2$ to match the eigenvalues of $J_{n,1},J_{n,2}$. This structure does not exist for $d>2$. However, there is still a connection between the approximate joint eigenvalues of $J_{n,i}$ and interior points of $\Tref^2$. To be clear, we must specify what is meant by ``approximate'' joint eigenvalues. 
 
 The approximate joint diagonalization problem for a set of real-valued symmetric matrices $\{C^1,\cdots,C^d\}$ is to find the orthogonal matrix $U$ such that the matrices 
 \begin{equation}
@@ -570,7 +569,7 @@ is equivalent to minimizing the off-diagonal entries of $F^k$ by orthogonal simi
 \begin{equation}
 	\min_{\substack{\text{$U,F^1,\cdots F^d$},\\ \text{$U^TU=UU^T=I$}}} \sum_{k=1}^d \big|\big|C^k-U^TF^k U\big|\big|_F^2
 \end{equation}
-is finding the best representation of $C^k$ in the basis of $U$ - a subspace fitting approach. For both problems, we require orthogonality of $U$, as we want it to represent the ``average eigenstructure" of $C^k$. For the Jacobi matrices $J_{n,i}$, this requirement is natural. We want a decomposition close to the optimal quadrature case of exact joint diagonlization. In fact, (I tested this using the methods described in \cite{bss} and \cite{jevd}) if the orthogonality requirement is removed, the eigenvalues (diagonals of $F^k$) will not necessarily be contained in $\mathcal{T}^2$. \color{red} If we can show that, under some assumption of the diagonality measure and the orthogonality requirement for $U$, the resulting solution (if found) gives eigenvalues within $\mathcal{T}^2$ (or a more general convex space), then we have a nice way to bootstrap Netwon-like methods for adaptive quadrature in $d$ dimensions.\color{black} \emph{ This is how we can generalize the Vioreanu-Rokhlin quadrature to 3D}.
+is finding the best representation of $C^k$ in the basis of $U$ - a subspace fitting approach. For both problems, we require orthogonality of $U$, as we want it to represent the ``average eigenstructure" of $C^k$. For the Jacobi matrices $J_{n,i}$, this requirement is natural. We want a decomposition close to the optimal quadrature case of exact joint diagonlization. In fact, (I tested this using the methods described in \cite{bss} and \cite{jevd}) if the orthogonality requirement is removed, the eigenvalues (diagonals of $F^k$) will not necessarily be contained in $\Tref^2$. \color{red} If we can show that, under some assumption of the diagonality measure and the orthogonality requirement for $U$, the resulting solution (if found) gives eigenvalues within $\Tref^2$ (or a more general convex space), then we have a nice way to bootstrap Netwon-like methods for adaptive quadrature in $d$ dimensions.\color{black} \emph{ This is how we can generalize the Vioreanu-Rokhlin quadrature to 3D}.
 %\color{blue}In the context of the HPS method, we investigated partitioning triangles into quadrilaterals, and using product orthogonal polynomials bases on each quad. Spectral convergence was observed for both integration as well as the solve - this might be the cleanest way forward.\color{black}
 
 %On the other hand, we know that any quadrature rule capable of exactly integrating polynomials of total degree $2n-1$ requires the number of points $N$ to be at least $\dim\Pi_{n-1}^d$. \color{red} A thought I had was to find all of the joint eigenvalues that do exist (it will be less than $N$), and compute the associated weights as usual with the generalized Golub-Welsch algorithm. Then, we fix these nodes and weights, iteratively add more nodes (which we consider fixed), and compute weights for these. \color{black} The resulting quadrature should be exact for polynomials of degree up to $2n-1$, but we now will require more than $N$ points. This follows from the fact that a minimal quadrature rule has $N$ points, and there are no minimal Gaussian quadrature rules on the triangle.
@@ -654,7 +653,7 @@ So, there are sparse banded matrices $\mathcal{L}_{(a,b,c)}^{(a-1,b,c)}$ and $\m
 	xf(x,y) &= x\bs{P}^{(a,b,c)}(x,y)^T\bs{f} = \bs{P}^{(a-1,b,c)}(x,y)^T\mathcal{L}_{(a,b,c)}^{(a-1,b,c)}\bs{f},\\
 	yf(x,y) &= x\bs{P}^{(a,b,c)}(x,y)^T\bs{f} = \bs{P}^{(a,b-1,c)}(x,y)^T\mathcal{L}_{(a,b,c)}^{(a,b-1,c)}\bs{f}.
 \end{align}
-\myssection{Sparse partial differential operator on $\mathcal{T}^2$}{}
+\myssection{Sparse partial differential operator on $\Tref^2$}{}
 In order to combine the discrete partial derivative operators into the Laplacian, we must promote the coefficients of the derivatives so that they are coordinates in the same basis. To be clear, we have
 \begin{align*}
 	\partial_{xx}f(x,y) &\approx \partial_x\big(\partial_x \bs{P}^{(a,b,c)}(x,y)^T\bs{f}\big) \\
@@ -662,7 +661,10 @@ In order to combine the discrete partial derivative operators into the Laplacian
 	&= \bs{P}^{(a+2,b,c+2)}(x,y)^T\mathcal{D}_{x,(a+1,b,c+1)}^{(a+2,b,c+2)}\mathcal{D}_{x,(a,b,c)}^{(a+1,b,c+1)}\bs{f}\\
 	\partial_{yy}f(x,y) &\approx \partial_y\big(\partial_y \bs{P}^{(a,b,c)}(x,y)^T\bs{f}\big) \\
 	&= \partial_y\Big(\bs{P}^{(a,b+1,c+1)}(x,y)^T \mathcal{D}_{y,(a,b,c)}^{(a,b+1,c+1)}\bs{f}\Big) \\
-	&= \bs{P}^{(a,b+2,c+2)}(x,y)^T\mathcal{D}_{y,(a,b+1,c+1)}^{(a,b+2,c+2)}\mathcal{D}_{y,(a,b,c)}^{(a,b+1,c+1)}\bs{f}
+	&= \bs{P}^{(a,b+2,c+2)}(x,y)^T\mathcal{D}_{y,(a,b+1,c+1)}^{(a,b+2,c+2)}\mathcal{D}_{y,(a,b,c)}^{(a,b+1,c+1)}\bs{f}\\
+	\partial_{xy}f(x,y) &\approx \partial_x\big(\partial_y \bs{P}^{(a,b,c)}(x,y)^T\bs{f}\big) \\
+&= \partial_x\Big(\bs{P}^{(a,b+1,c+1)}(x,y)^T \mathcal{D}_{y,(a,b,c)}^{(a,b+1,c+1)}\bs{f}\Big) \\
+&= \bs{P}^{(a+1,b+1,c+2)}(x,y)^T\mathcal{D}_{x,(a,b+1,c+1)}^{(a+1,b+1,c+2)}\mathcal{D}_{y,(a,b,c)}^{(a,b+1,c+1)}\bs{f}
 \end{align*}  
 Since the coefficients of $\partial_{xx}f(x,y)$ are in the span of $\bs{P}^{(a+2,b,c+2)}$, while those of $\partial_{yy}f(x,y)$ are in the span of $\bs{P}^{(a,b+2,c+2)}$, we can promote both of them to $(a+2,b+2,c+2)$. Let $\Delta_{(a,b,c)}^{(a+2,b+2,c+2)}$ denote the discrete Laplacian which takes the modes of $f(x,y)$ in the basis of $\bs{P}^{(a,b,c)}$ and returns the coefficients of $\Delta f$ in the basis of $\bs{P}^{(a+2,b+2,c+2)}$. Then, we can construct the modal operator through
 \begin{equation}\label{eq:laptrimat}
@@ -672,15 +674,29 @@ Since the coefficients of $\partial_{xx}f(x,y)$ are in the span of $\bs{P}^{(a+2
 	\end{split}
 \end{equation}
 
-The sparsity pattern of $\Delta_{(a,b,c)}^{(a+2,b+2,c+2)}$ is visualized in \myref{Figure}{fig:laptrimat} for expansion order $n=19$.
+All operators have been verified using a similar approach to that presented at the end of \myref{Section}{sec:promoteoptri}. To eliminate the rank deficiency in the modal Laplacian and construct an operator which will solve \eqref{eq:laptri}, we can use properties (i)-(iii) listed in \myref{Section}{sec:koornpoly}. By evaluating the polynomials on the boundary, we can explicitly enforce the boundary conditions. For expansion order $m-1$, we always have $$\text{rank}\big(\Delta_{(a,b,c)}^{(a+2,b+2,c+2)}\big) = (m-2)(m-1)/2.$$ So, there are $m(m+1)/2-(m-2)(m-1)/2 = 2m-1$ rank deficient rows. To fill in the rank deficient rows with the boundary conditions, we must first select the appropriate number of interpolation nodes for the left, bottom and hypotenuse edge of $\Tref^2$. 
+\begin{itemize}
+	\item For the left and bottom edges, we take $$N_\text{lb} = \Big\lfloor \frac{2m-1}{2+\sqrt{2}} \Big\rfloor.$$
+	\item For the hypotenuse, we take $$N_{\text{h}} = (2m-1)-2N_{\text{lb}}.$$
+\end{itemize}
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.75\linewidth]{./figures/lap_tri_mat}
-	\caption{Sparsity and band structure of the modal Laplacian \eqref{eq:laptrimat} for expansion order $n=19$.}\label{fig:laptrimat}
-\end{figure}
+The nodes for this task come from three 1D Gauss-Jacobi quadrature rules with parameters $a,b$. For example, the complete operator with Dirichlet boundary conditions can be given as 
+ \begin{equation}
+ \tilde{\Delta}_{(a,b,c)}^{(a+2,b+2,c+2)} = \begin{bmatrix}\Delta_{(a,b,c)}^{(a+2,b+2,c+2)} \\
+ \bs{P}^{(a,b,c)}(\bs{x}_b,0)^T\\
+ \bs{P}^{(a,b,c)}(0,\bs{x}_l)^T\\
+ \bs{P}^{(a,b,c)}(\bs{x}_h,1-\bs{x}_h)^T\end{bmatrix},
+ \end{equation}
+where $\bs{x}_b,\bs{x}_l$ and $\bs{x}_h$ are Gauss-Jacobi nodes shifted to the interval $(0,1)$ for the bottom, left and hypotenuse edges of $\Tref^2$. The process for solving \eqref{eq:laptri} is then as follows:
+\begin{enumerate}[(i)]
+	\item Expand the right-hand side $f(x,y)$ in the basis $\bs{P}^{(\frac{3}{2},\frac{3}{2},\frac{3}{2})}$ by first computing the coefficients in $\bs{P}^{(\frac{1}{2},\frac{1}{2},\frac{1}{2})}$ and promoting them by composing the three single-parameter promotion matrices. 
+	\item Assemble $\tilde{\Delta}$ and solve for the coefficients $\bs{u}$ of $u(x,y)$ in the basis $\bs{P}^{(\frac{1}{2},\frac{1}{2},\frac{1}{2})}$ through $$\bs{u} = \tilde{\Delta}^{-1}\begin{bmatrix}\bs{f}\\
+	g(\bs{x_b},0)^T\\g(0,\bs{x_l})^T\\g(\bs{x}_h,1-\bs{x}_h)^T\end{bmatrix},$$ where $\bs{f}$ are the coefficients of the right-hand side under $\bs{P}^{(\frac{3}{2},\frac{3}{2},\frac{3}{2})}$ obtained in step (i).
+	\item Evaluate the approximation $\hat{u}(x,y)$ using the Vandermonde matrix as $$\hat{u}(\bs{x},\bs{y}) = \bs{P}^{(\frac{1}{2},\frac{1}{2},\frac{1}{2})}(\bs{x},\bs{y})^T\bs{u},$$ where $\bs{x},\bs{y}$ are the quadrature nodes used in step (i).
+\end{enumerate}
 
-All operators have been verified using a similar approach to that presented at the end of \myref{Section}{sec:promoteoptri}. To eliminate the rank deficiency in the modal Laplacian and construct an operator which will solve \eqref{eq:laptri}, we can use properties (i)-(iii) listed in \myref{Section}{sec:koornpoly}. By evaluating the polynomials on the boundary, we can explicitly enforce the Dirichlet boundary condition. The nodes for this task come from the same quadrature rule used to compute the coefficients of $f(x,y)$. \color{red} I still can't get the interpolatory decomposition to work because of rank mismatch, so have gone ahead and implemented the method for the weighted basis \color{black}. For the case of zero Dirichlet boundary conditions, we can use the weighted basis $\tilde{\bs{P}}^{(a,b,c)}$ which evaluates to $\bs{0}$ on the boundary and naturally satisfies homogeneous Dirichlet conditions. We will construct the modal Laplacian $\Delta_W$ which operates on coefficients under the basis $\tilde{\bs{P}}^{(3/2,3/2,3/2)}$ and produces coefficients under $\bs{P}^{(3/2,3/2,3/2)}$. Note, \emph{the conversion from the weighted to regular Koornwinder basis depends on our choice of parameters $a=b=c=3/2$}. 
+
+For the case of zero Dirichlet boundary conditions, we can use the weighted basis $\tilde{\bs{P}}^{(a,b,c)}$ which evaluates to $\bs{0}$ on the boundary and naturally satisfies homogeneous Dirichlet conditions. We will construct the modal Laplacian $\Delta_W$ which operates on coefficients under the basis $\tilde{\bs{P}}^{(3/2,3/2,3/2)}$ and produces coefficients under $\bs{P}^{(3/2,3/2,3/2)}$. Note, \emph{the conversion from the weighted to regular Koornwinder basis depends on our choice of parameters $a=b=c=3/2$}. 
 
 With $\bs{f}$ the coefficients of $f(x,y)$ in the weighted basis, 
 \begin{align*}
@@ -699,7 +715,8 @@ When $a=b=c=3/2$, we have
 so that the second partials can be constructed with the promotion and unweighted ladder operator:
 \begin{align}
 	\partial_{xx}f(x,y) &= \bs{P}^{(a,b,c)}(x,y)^T\Big( \mathcal{K}_{(a,b-1,c)}^{(a,b,c)}\mathcal{D}_{x,(a-1,b-1,c-1)}^{(a,b-1,c)}\mathcal{L}_{(a-1,b,c-1)}^{(a-1,b-1,c-1)}\mathcal{W}_{x,(a,b,c)}^{(a-1,b,c-1)}\bs{f}\Big),\\
-	\partial_{yy}f(x,y) &= \bs{P}^{(a,b,c)}(x,y)^T\Big( \mathcal{K}_{(a-1,b,c)}^{(a,b,c)}\mathcal{D}_{y,(a-1,b-1,c-1)}^{(a-1,b,c)}\mathcal{L}_{(a,b-1,c-1)}^{(a-1,b-1,c-1)}\mathcal{W}_{y,(a,b,c)}^{(a,b-1,c-1)}\bs{f}\Big).
+	\partial_{yy}f(x,y) &= \bs{P}^{(a,b,c)}(x,y)^T\Big( \mathcal{K}_{(a-1,b,c)}^{(a,b,c)}\mathcal{D}_{y,(a-1,b-1,c-1)}^{(a-1,b,c)}\mathcal{L}_{(a,b-1,c-1)}^{(a-1,b-1,c-1)}\mathcal{W}_{y,(a,b,c)}^{(a,b-1,c-1)}\bs{f}\Big),\\
+	\partial_{xy}f(x,y) &= \bs{P}^{(a,b,c)}(x,y)^T\Big(\mathcal{K}_{(a,b-1,c)}^{(a,b,c)}\mathcal{D}_{x,(a-1,b-1,c-1)}^{(a,b-1,c)}\mathcal{L}_{(a,b-1,c-1)}^{(a-1,b-1,c-1)}\mathcal{W}_{y,(a,b,c)}^{(a,b-1,c-1)}\bs{f}\Big)
 \end{align}
 $\Delta_W$ is then given by
 \begin{equation}\label{eq:laptriweight}
@@ -708,26 +725,86 @@ $\Delta_W$ is then given by
 	&+\mathcal{K}_{(a-1,b,c)}^{(a,b,c)}\mathcal{D}_{y,(a-1,b-1,c-1)}^{(a-1,b,c)}\mathcal{L}_{(a,b-1,c-1)}^{(a-1,b-1,c-1)}\mathcal{W}_{y,(a,b,c)}^{(a,b-1,c-1)}
 	\end{split}
 \end{equation}
-The matrix $\Delta_W$ has full rank, as indicated by the fill-in the last rows and columns of the sparsity pattern in \myref{Figure}{fig:laptrimat1}. The process for solving \eqref{eq:laptri} is as follows:
+The matrix $\Delta_W$ has full rank, as indicated by the fill-in the last rows and columns of the sparsity pattern in \myref{Figure}{fig:laptrimat1}. The process for solving \eqref{eq:laptri} with zero Dirichlet conditions is as follows:
 \begin{enumerate}[(i)]
 	\item Expand the right-hand side $f(x,y)$ in the basis $\bs{P}^{(\frac{3}{2},\frac{3}{2},\frac{3}{2})}$ by first computing the coefficients in $\bs{P}^{(\frac{1}{2},\frac{1}{2},\frac{1}{2})}$ and promoting them by composing the three single-parameter promotion matrices. 
 	\item Assemble $\Delta_W$ and solve for the coefficients $\bs{u}$ of $u(x,y)$ in the weighted basis $\tilde{\bs{P}}^{(\frac{3}{2},\frac{3}{2},\frac{3}{2})}$ through $$\bs{u} = \Delta_W^{-1}\bs{f},$$ where $\bs{f}$ are the coefficients of the right-hand side under $\bs{P}^{(\frac{3}{2},\frac{3}{2},\frac{3}{2})}$ obtained in step (i).
-	\item Evaluate the approximation $\hat{u}(x,y)$ using the weighted vandermonde matrix as $$u(\bs{x},\bs{y}) = \tilde{\bs{P}}^{(\frac{3}{2},\frac{3}{2},\frac{3}{2})}(\bs{x},\bs{y})^T\bs{u},$$ where $\bs{x},\bs{y}$ are the quadrature nodes used in step (i).
+	\item Evaluate the approximation $\hat{u}(x,y)$ using the weighted Vandermonde matrix as $$\hat{u}(\bs{x},\bs{y}) = \tilde{\bs{P}}^{(\frac{3}{2},\frac{3}{2},\frac{3}{2})}(\bs{x},\bs{y})^T\bs{u},$$ where $\bs{x},\bs{y}$ are the quadrature nodes used in step (i).
 \end{enumerate}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{./figures/lap_tri_weighted_mat}
-	\caption{Sparsity and band structure of the weighed modal Laplacian \eqref{eq:laptriweight} for expansion order $n=10$.}\label{fig:laptrimat1}
+	\includegraphics[width=1\linewidth]{./figures/lap_tri_weighted_mat}
+	\caption{Sparsity and band structure of the weighted modal Laplacian \eqref{eq:laptriweight} for expansion order $n=13$.}\label{fig:laptrimat1}
 \end{figure}
+
+\myssection{Sparse partial differential operator on general $\Tau^2$}{}
+For general triangular elements $\Tau^2$ with vertices $(x_0,y_0),(x_1,y_1), (x_2,y_2)$, we can use the following affine transformation for $x,y\in\Tau^2$ and $r,s\in \Tref^2$ to construct a map between $\Tau^2$ and $\Tref^2$;
+\begin{align}
+\begin{bmatrix}
+r\\
+s
+\end{bmatrix} &\mapsto
+A
+\begin{bmatrix} r\\s\end{bmatrix} + 
+\begin{bmatrix}
+x_0\\
+y_0
+\end{bmatrix} = \begin{bmatrix} x \\ y \end{bmatrix},\label{duffygen}\\
+\begin{bmatrix}
+x\\
+y
+\end{bmatrix} &\mapsto A^{-1}\begin{bmatrix}
+x-x_0\\
+y-y_0
+\end{bmatrix} = \begin{bmatrix}
+r\\
+s
+\end{bmatrix},\label{duffygeninv}
+\end{align}
+where 
+\begin{equation*}
+A = \begin{bmatrix}
+x_1-x_0 & x_2-x_0\\
+y_1-y_0 & y_2-y_0
+\end{bmatrix}.
+\end{equation*}
+For $(x,y)\in\Tau^2$, the Laplacian is augmented with Jacobian factors of the coordinate transformation:
+\begin{align}
+\partial_{xx} u &= (\partial_x r)^2(\partial_{rr}u) + 2(\partial_x r)(\partial_x s)(\partial_{rs}u) + (\partial_x s)^2 (\partial_{ss}u) + (\partial_{xx} r)(\partial_r u) + (\partial_{xx} s)(\partial_s u)\nonumber\\
+&= (\partial_x r)^2(\partial_{rr}u) + 2(\partial_x r)(\partial_x s)(\partial_{rs}u) + (\partial_x s)^2 (\partial_{ss}u),\label{dxxmap}\\
+\partial_{yy} u &= (\partial_y r)^2(\partial_{rr}u) + 2(\partial_y r)(\partial_y s)(\partial_{rs}u) + (\partial_y s)^2 (\partial_{ss}u) + (\partial_{yy} r)(\partial_r u) + (\partial_{yy} s)(\partial_s u)\nonumber\\
+&=(\partial_y r)^2(\partial_{rr}u) + 2(\partial_y r)(\partial_y s)(\partial_{rs}u) + (\partial_y s)^2 (\partial_{ss}u) \label{dyymap},
+\end{align}
+from which we note we have to additionally compute the modal mixed partial operator $\mathcal{D}_{rs}$. 
+
+\textbf{Note}: We find that the condition number of the discrete operator with boundary conditions included is best controlled if the boundary nodes are distributed to the edges of $\mathcal{T}^2$ according to length fraction. In this way, longer sides get more nodes, and smaller sides get fewer. This avoids node coalescence when aspect ratio is large.
+
 \myssection{Numerical experiments}{}
-In \myref{Figure}{fig:errslapweight}, we plot the relative solution error in solving \eqref{eq:laptri} for several manufactured solutions (see the legend) satisfying the homogeneous Dirichlet B.C. $g(x,y)=0$. In the figure, $N = \dim\Pi_{n}^d = (n+1)(n+2)/2$ is the number of coefficients, and $n$ is the expansion order. For each problem considered, we obtain at least one digit of accuracy as the expansion order $n$ is increased by one. Hence, the method and implementation exhibits spectral convergence.
+In \myref{Figure}{fig:errslapweight}, we plot the relative solution error in solving \eqref{eq:laptri} for several manufactured solutions (see the legend) satisfying the homogeneous Dirichlet B.C. $g(x,y)=0$ on the reference triangle $\Tref^2$. In the figure, $N = \dim\Pi_{n}^d = (n+1)(n+2)/2$ is the number of coefficients, and $n$ is the expansion order. For each problem considered, we obtain at least one digit of accuracy as the expansion order $n$ is increased by one. Hence, the method and implementation exhibits spectral convergence.
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.9\linewidth]{./figures/errs_lap_weight}
+	\includegraphics[width=0.75\linewidth]{./figures/errs_lap_weight}
 	\caption{Relative error in solving \eqref{eq:laptri} for several manufactured solutions $u$ (see legend) with $g(x,y) = 0$ (homogeneous Dirichlet B.Cs) as the expansion order is increased}\label{fig:errslapweight}
 \end{figure}
-%\mysssection{Interpolatory decomposition for B.C. specification}{}
+
+Now, we will consider a range of increasingly degenerate triangles by sampling the $y_3$ coordinate from $[0.001,1]$ corresponding to aspect ratios between $[1,500]$. That is, we shift the top corner of the reference triangle down, making each subsequent triangle thinner. We want to know how the methods (unweighted vs weighted) are affected by the aspect ratio of the triangle. In \myref{Figure}{fig:errslapaspect}, we plot the relative error in the solution to \eqref{eq:laptri} on several (non-reference) triangles $\mathcal{T}$ with aspect ratios between $[1,500]$. We see that for the entire range of aspect ratios considered (very thin to normal triangles), both methods exhibit spectral convergence. The inset panels show the dependence of the conditioning of the discrete operator on the aspect ratio for a fixed order. We see that the operator grows illconditioned as the aspect ratio increases. This growth is better controlled in the weighted case.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\linewidth]{./figures/errs_lap_aspect}
+	\caption{Relative error in solving \eqref{eq:laptri} for several manufactured solutions $u$ (see legend) with boundary condition $g(x,y) = u(x,y)$ for the unweighted Laplacian and $g(x,y)=0$ for the weighted one as the expansion order is increased. Several aspect ratios between $[1,500]$ are considered.}\label{fig:errslapaspect}
+\end{figure}
+In \myref{Figure}{fig:lapcond}, we plot the condition number of the discrete operator as the expansion order is increased, for each aspect ratio and the weighted/unweighted methods. The weighted basis gives a much better conditioned operator, though both methods exhibit growth of the condition number in $N$. The width of the bands indicates control given a fixed $N$ and growth in aspect ratio.
+
+Hence, for the unweighted basis, to mitigate loss of accuracy as the aspect ratio increases, we need to find even better boundary nodes to keep the discrete operator reasonably conditioned as expansion order is increased. 
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\linewidth]{./figures/cond_lap}
+	\caption{Condition number of weighted and unweighted discrete modal Laplacians for several expansion orders and aspect ratios.}\label{fig:lapcond}
+\end{figure}
 
 \newpage
 \mysection{General theory of orthogonal polynomials}{sec:orthopoly}
